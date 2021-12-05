@@ -1,0 +1,27 @@
+@import '../../styles/mixins.scss';
+
+.contentContainer {
+  @include size(100%, 100%);
+  @include flex($justify: space-between);
+  position: absolute;
+  background-image: url('../../assets/background.jpg');
+  background-size: cover;
+  overflow: hidden;
+  padding: 0 4rem;
+
+  .playerContainer {
+    @include size(50%, 100%);
+    @include flex(column, flex-end, flex-start);
+  }
+
+  .formContainer {
+    @include size(50%, 100%);
+    @include flex(column, center, flex-start);
+    padding-right: 4rem;
+
+    img {
+      min-width: 55rem;
+      max-width: 55rem;
+    }
+  }
+}

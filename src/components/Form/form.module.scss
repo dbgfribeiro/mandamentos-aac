@@ -1,0 +1,40 @@
+@import '../../styles/mixins.scss';
+
+.form {
+  width: 55rem;
+  padding: 0 4rem;
+
+  .inputField {
+    width: 100%;
+    @include flex(column, center, flex-end);
+    gap: 1rem;
+    padding: 2rem 0;
+
+    textarea {
+      width: 100%;
+      padding: 0;
+      background: transparent;
+      border-style: none;
+      border-bottom: 0.25rem solid #1f1f1f;
+      font-family: $hanson;
+      font-size: 4rem;
+      min-height: 1em;
+      overflow: auto;
+      hyphens: auto;
+      resize: none;
+    }
+  }
+
+  button {
+    background: $darkgray;
+    border: 0.25rem solid $darkgray;
+    font-family: $hanson;
+    color: white;
+    padding: 1rem 2rem;
+
+    &:hover {
+      background: transparent;
+      color: $darkgray;
+    }
+  }
+}
