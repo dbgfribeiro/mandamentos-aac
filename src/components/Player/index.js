@@ -1,14 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'; 
 import {playerContainer} from './player.module.scss';
 
-import player1 from '../../assets/players/jogador1.png'
-
-const Player = () => {
+const Player = ({ playerImage }) => {
   return (
     <div className={playerContainer}>
-      <img src={player1} alt='player-portrair'/>
+      <img src={playerImage} alt='player-portrait'/>
     </div>
   )
 }
 
 export default Player;
+
+Player.propTypes = {
+  playerImage: PropTypes.string,
+};

@@ -2,7 +2,7 @@
 
 .contentContainer {
   @include size(100%, 100%);
-  @include flex($justify: space-between);
+  @include flex($justify: center);
   position: absolute;
   background-image: url('../../assets/background.jpg');
   background-size: cover;
@@ -11,7 +11,31 @@
 
   .playerContainer {
     @include size(50%, 100%);
-    @include flex(column, flex-end, flex-start);
+    @include flex(column, flex-end, flex-end);
+    position: relative;
+    padding-right: 4rem;
+
+    button {
+      @include flex();
+      gap: 0.5rem;
+      position: absolute;
+      top: 4rem;
+      left: 0;
+      color: $black;
+
+      &:hover {
+        color: $gold;
+      }
+
+      img {
+        width: 2.5rem;
+      }
+
+      span {
+        font-family: $hanson;
+        font-size: 1.4rem;
+      }
+    }
   }
 
   .formContainer {

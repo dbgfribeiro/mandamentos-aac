@@ -33,7 +33,7 @@ const Form = () => {
         <button>ENVIAR</button>
       </div>
       {showResult ?
-        <Result message={answer} restart={!showResult}/>
+        <Result message={answer}/>
       : null}
     </form>
   )
