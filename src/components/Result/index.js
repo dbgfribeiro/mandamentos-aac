@@ -5,7 +5,6 @@ import {resultModal, resultContainer, social, btnWrapper} from './result.module.
 
 const Result = ({ message , playerId}) => {
   const [poster, setPoster] = useState(null);
-  const [posterUrl, setPosterUrl] = useState('');
   const canvas = useRef(null);
 
   /*download poster*/
@@ -15,7 +14,6 @@ const Result = ({ message , playerId}) => {
     link.download = 'osmeusmandamentos.png';
     link.href = generatedPoster.toDataURL();
     link.click();
-    setPosterUrl(link);
   }
   
   /*generate canvas*/
@@ -38,20 +36,43 @@ const Result = ({ message , playerId}) => {
       }
 
       /*Headline*/
+      var maxWidth = 380;
+      var lineHeight = 35;
+      var x = 475;
+      var y = 310;
+      var words = message.split(' ');
+      var line = '';
+
       const headline = new Image();
       headline.src = 'headline.png';
       headline.onload = function(){
-        ctx.drawImage(headline, 425, 65, 450, 213.64);
+        ctx.drawImage(headline, 425, 75, 450, 213.64);
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = ctx.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            // ctx.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+          ctx.font = "26px Hanson";
+          ctx.fillText(line.toUpperCase(), x, y);
+        }
       }
 
-      ctx.font = "32px Hanson";
-      ctx.fillText(message.toUpperCase(), 475, 300);
     }
   }, [poster, canvas, message])
 
+  console.log(message.length);
+
   return (
     <div className={resultModal}>
-      <h1>O TEU RESULTADO: {playerId}</h1>
+      <h1>O TEU RESULTADO:</h1>
       <div className={resultContainer}>
         {/* <p>{message}</p> */}
         <canvas 
