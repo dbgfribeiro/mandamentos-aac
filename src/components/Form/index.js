@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import TextareaAutosize from 'react-textarea-autosize';
+import PropTypes from 'prop-types';
 import Result from '../../components/Result';
 import {form, inputField} from './form.module.scss';
 
-const Form = () => {
+const Form = ({ player }) => {
   const [answer, setAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
 
@@ -20,23 +21,29 @@ const Form = () => {
   }
 
   return (
-    <form className={form} onSubmit={handleSubmit}>
-      <div className={inputField}>
-        <TextareaAutosize
-          maxRows={4}
-          type='text'
-          name='answer'
-          placeholder='Resposta...'
-          required
-          onChange={(e)=>setAnswer(e.target.value)}
-        />
-        <button>ENVIAR</button>
-      </div>
+    <>
+      <form className={form} onSubmit={handleSubmit}>
+        <div className={inputField}>
+          <TextareaAutosize
+            maxRows={4}
+            type='text'
+            name='answer'
+            placeholder='Resposta...'
+            required
+            onChange={(e)=>setAnswer(e.target.value)}
+          />
+          <button>ENVIAR</button>
+        </div>
+      </form>
       {showResult ?
-        <Result message={answer}/>
+        <Result message={answer} playerId={player}/>
       : null}
-    </form>
+    </>
   )
 }
 
 export default Form;
+
+Result.propTypes = {
+  player: PropTypes.string,
+};

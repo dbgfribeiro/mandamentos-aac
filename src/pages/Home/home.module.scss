@@ -5,7 +5,7 @@
   @include flex($justify: center);
   position: absolute;
   background-image: url('../../assets/background.jpg');
-  background-size: cover;
+  background-size: 100% 100%;
   overflow: hidden;
   padding: 0 4rem;
 
@@ -13,7 +13,11 @@
     @include size(50%, 100%);
     @include flex(column, flex-end, flex-end);
     position: relative;
-    padding-right: 4rem;
+    padding: 0 4rem;
+
+    img {
+      width: 85%;
+    }
 
     button {
       @include flex();
@@ -21,10 +25,12 @@
       position: absolute;
       top: 4rem;
       left: 0;
+      padding: 2rem;
       color: $black;
 
       &:hover {
-        color: $gold;
+        background-image: url('../../assets/dourado.png');
+        background-size: 100% 100%;
       }
 
       img {

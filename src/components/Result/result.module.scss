@@ -12,6 +12,7 @@
   color: white;
   text-align: center;
   overflow: auto;
+  z-index: 2;
 
   .resultContainer {
     margin: 2rem 0;
@@ -23,17 +24,38 @@
     }
   }
 
-  a {
-    background: $darkgray;
-    border: 0.25rem solid white;
-    font-family: $hanson;
-    font-size: 1.4rem;
-    color: white;
-    padding: 1rem 2rem;
+  .btnWrapper {
+    @include flex();
+    width: 100%;
+    gap: 2rem;
 
-    &:hover {
-      background: white;
-      color: $darkgray;
+
+    .social {
+      circle {
+        fill: none;
+        stroke: white;
+        stroke-width: 0.25rem;
+      }
+    }
+
+    button {
+      background: $darkgray;
+      border: 0.25rem solid white;
+      font-family: $hanson;
+      font-size: 1.4rem;
+      color: white;
+      padding: 1rem 2rem;
+
+      &:hover {
+        background: white;
+        color: $darkgray;
+      }
+    }
+
+    a {
+      font-family: $hanson;
+      font-size: 1.4rem;
+      opacity: 0.5;
     }
   }
 }
