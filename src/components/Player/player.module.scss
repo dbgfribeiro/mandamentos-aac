@@ -3,4 +3,8 @@
 .playerContainer {
   @include flex($justify: flex-end);
   width: 100%;
+
+  @include tablet {
+    @include flex($justify: center);
+  }
 }

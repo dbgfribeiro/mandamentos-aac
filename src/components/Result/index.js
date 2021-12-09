@@ -26,18 +26,20 @@ const Result = ({ message , playerId}) => {
   useEffect(() => {
     if(poster && canvas) { 
       const ctx = canvas.current.getContext("2d");
+      ctx.imageSmoothingEnabled = true;
       ctx.drawImage(poster, 0, 0, 950, 500);
 
       /*Player*/
       const player = new Image();
       player.src = 'players/player' + playerId + '.png';
       player.onload = function(){
+        ctx.imageSmoothingEnabled = true;
         ctx.drawImage(player, 70, 32, 375, 469.16);
       }
 
       /*Headline*/
       var maxWidth = 380;
-      var lineHeight = 35;
+      var lineHeight = 32;
       var x = 475;
       var y = 310;
       var words = message.split(' ');
@@ -46,6 +48,7 @@ const Result = ({ message , playerId}) => {
       const headline = new Image();
       headline.src = 'headline.png';
       headline.onload = function(){
+        ctx.imageSmoothingEnabled = true;
         ctx.drawImage(headline, 425, 75, 450, 213.64);
 
         for(var n = 0; n < words.length; n++) {
@@ -61,6 +64,7 @@ const Result = ({ message , playerId}) => {
             line = testLine;
           }
           ctx.font = "26px Hanson";
+          ctx.imageSmoothingEnabled = true;
           ctx.fillText(line.toUpperCase(), x, y);
         }
       }
@@ -68,7 +72,6 @@ const Result = ({ message , playerId}) => {
     }
   }, [poster, canvas, message])
 
-  console.log(message.length);
 
   return (
     <div className={resultModal}>

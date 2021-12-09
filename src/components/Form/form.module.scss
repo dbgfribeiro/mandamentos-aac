@@ -1,8 +1,22 @@
 @import '../../styles/mixins.scss';
 
 .form {
-  width: 55rem;
+  width: 57.5rem;
   padding: 0 4rem;
+  margin-left: -0.5rem;
+
+  @include tablet {
+    width: 53rem;
+    margin: 0;
+  }
+
+  @include mobile {
+    width: 37.5rem;
+  }
+
+  @include mobileSmall {
+    width: 33rem;
+  }
 
   .inputField {
     width: 100%;
@@ -23,6 +37,14 @@
       overflow: auto;
       hyphens: auto;
       resize: none;
+
+      @include tablet {
+        font-size: 2rem;
+      }
+
+      @include mobile {
+        font-size: 1.8rem;
+      }
     }
   }
 

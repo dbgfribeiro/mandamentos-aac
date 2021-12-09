@@ -1,10 +1,11 @@
 import React , {useState, useEffect} from 'react';
 import Form from '../../components/Form';
 import Player from '../../components/Player';
-import {contentContainer, playerContainer, formContainer } from './home.module.scss';
+import {contentContainer, playerContainer, formContainer, hashtag } from './home.module.scss';
 
 import shuffle from '../../assets/icons/shuffle.svg'
 import headline from '../../assets/headline.png'
+import tucoimbra from '../../assets/tucoimbra.png'
 
 const Home = () => {
   const players = [1, 2, 3, 4, 5, 6];
@@ -25,6 +26,7 @@ const Home = () => {
         <img src={headline} alt='headline'/>
         <Form player={playerNumber}/>
       </div>
+      <img src={tucoimbra} alt='hashtag' className={hashtag}/>
     </div>
   )
 }
