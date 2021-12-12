@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState} from 'react';
 import Form from '../../components/Form';
 import Player from '../../components/Player';
 import {contentContainer, playerContainer, formContainer, hashtag } from './home.module.scss';
