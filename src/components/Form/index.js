@@ -36,7 +36,7 @@ const Form = ({ player }) => {
         </div>
       </form>
       {showResult ?
-        <Result message={answer} playerId={player}/>
+        <Result message={answer} player={player}/>
       : null}
     </>
   )

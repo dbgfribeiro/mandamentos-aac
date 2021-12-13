@@ -1,108 +1,77 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState } from "react";
+import { exportComponentAsJPEG } from 'react-component-export-image';
 import PropTypes from 'prop-types';
 
-import {resultModal, resultContainer, btnWrapper} from './result.module.scss';
+import tucoimbra from '../../assets/tucoimbra.png'
 
-const Result = ({ message , playerId }) => {
-  const [poster, setPoster] = useState(null);
-  const [togglePoster, setTogglePoster] = useState(false);
-  const canvas = useRef(null);
+import {
+  resultModal,
+  resultContainer,
+  btnWrapper,
+  posterStyles,
+  resultPoster,
+  resultPosterSquare,
+  resultPosterStory,
+  messageWrapper,
+  playerImage,
+  tag,
+  controls,
+  download
+} from './result.module.scss';
 
-  const toggle = () => {
-    setTogglePoster(!togglePoster);
-  }
 
-  /*download poster*/
-  const downloadPoster = () => {
-    const link = document.createElement('a');
-    var generatedPoster = document.getElementById("posterCanvas"); 
-    link.download = 'osmeusmandamentos.png';
-    link.href = generatedPoster.toDataURL();
-    link.click();
-  }
+const ComponentToPrint = React.forwardRef(({message, player, posterNum}, ref) => (
+  <>
+    {posterNum === 0 ? (
+      <div ref={ref} class={resultPoster}>
+        <img src={'players/player' + player + '.png'} alt='player' className={playerImage}/>
+        <div className={messageWrapper}>
+          <img src='headline.png' alt='headline'/>
+          <h1>{message}</h1>
+        </div>
+        <img src={tucoimbra} alt='hashtag' className={tag}/>
+      </div>
+    ) : posterNum === 1 ?( 
+      <div ref={ref} class={resultPosterSquare}>
+      </div>
+    ) : posterNum === 2 ?( 
+      <div ref={ref} class={resultPosterStory}>
+      </div>
+    ) : null}
+  </>
+));
 
-  /*generate canvas*/
-  useEffect(() => {
-    const background = new Image();
-    background.src = 'background.jpg';
-    background.onload = () => setPoster(background);
-  }, [])
+const Result = ({message, player}) => {
+  const [posterStyle, setPosterStyle] = useState(0);
 
-  useEffect(() => {
-    if(poster && canvas) { 
-      const ctx = canvas.current.getContext("2d");
-      ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(poster, 0, 0, 950, 500);
-
-      const player = new Image();
-      const gold = new Image();
-      const headline = new Image();
-      player.src = 'players/player' + playerId + '.png';
-      gold.src = 'dourado.png';
-      headline.src = 'headline.svg';
-      
-
-      var maxWidth = 380;
-      var lineHeight = 32;
-      var x = 475;
-      var y = 310;
-      var words = message.split(' ');
-      var line = '';
-      headline.onload = function(){
-        ctx.imageSmoothingEnabled = true;
-        ctx.drawImage(player, 70, 32, 375, 469.16);
-        ctx.drawImage(gold, 430, 200, 475, 74.9);
-        ctx.drawImage(headline, 485, 75, 350, 173.61);
-
-        for(var n = 0; n < words.length; n++) {
-          var testLine = line + words[n] + ' ';
-          var metrics = ctx.measureText(testLine);
-          var testWidth = metrics.width;
-          if (testWidth > maxWidth && n > 0) {
-            // ctx.fillText(line, x, y);
-            line = words[n] + ' ';
-            y += lineHeight;
-          }
-          else {
-            line = testLine;
-          }
-          ctx.font = "26px Hanson";
-          ctx.imageSmoothingEnabled = true;
-          ctx.fillText(line.toUpperCase(), x, y);
-        }
-      }
-    }
-  }, [poster, canvas, message])
-
-  console.log(togglePoster);
+  const posterRef = useRef();
   
   return (
-    <div className={resultModal}>
-      <h1>O TEU RESULTADO:</h1>
-      <button onClick={toggle}>teste</button>
-      <div className={resultContainer}>
-        {!togglePoster ?
-        (
-          <canvas 
-            id='posterCanvas'
-            ref={canvas}
-            width={950}
-            height={500}
-          />
-        ) : (
-          <canvas 
-            id='posterCanvas'
-            ref={canvas}
-            width={500}
-            height={500}
-          />
-        )}
+      <div className={resultModal}>
+        <h1>O TEU RESULTADO:</h1>
+        <div className={resultContainer}>
+        <ComponentToPrint
+          ref={posterRef}
+          message={message}
+          player={player}
+          posterNum={posterStyle}
+          w='50'
+          h='50'
+        />
+        </div>
+        <div className={btnWrapper}>
+          <div className={posterStyles}>
+            <button onClick={()=>setPosterStyle(0)}><div></div><p>horizontal</p></button>
+            <button onClick={()=>setPosterStyle(1)}><div></div><p>quadrado</p></button>
+            <button onClick={()=>setPosterStyle(2)}><div></div><p>vertical</p></button>
+          </div>
+
+          <div className={controls}>
+            <button className={download} onClick={() => exportComponentAsJPEG(posterRef)}>Exportar</button>
+            <a href='/'>REPETIR</a>
+          </div>
+        </div>
       </div>
-      <div className={btnWrapper}>
-        <button onClick={downloadPoster}>TRANSFERIR</button>
-        <a href='/'>REPETIR</a>
-      </div>
-    </div>
   )
 }
 
