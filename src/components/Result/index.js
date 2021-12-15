@@ -48,7 +48,7 @@ const Result = ({message, player}) => {
   
   return (
       <div className={resultModal}>
-        <h1>O TEU RESULTADO:</h1>
+        <h1>Guarda a tua imagem e partilha connosco através do <span>#TuCoimbra</span></h1>
         <div className={resultContainer}>
         <ComponentToPrint
           ref={posterRef}
@@ -67,7 +67,7 @@ const Result = ({message, player}) => {
           </div>
 
           <div className={controls}>
-            <button className={download} onClick={() => exportComponentAsJPEG(posterRef)}>Exportar</button>
+            <button className={download} onClick={() => exportComponentAsJPEG(posterRef)}>Guarda a tua imagem</button>
             <a href='/'>REPETIR</a>
           </div>
         </div>
