@@ -12,6 +12,9 @@ import {
   resultPoster,
   resultPosterSquare,
   resultPosterStory,
+  resultPosterPreview,
+  resultPosterSquarePreview,
+  resultPosterStoryPreview,
   messageWrapper,
   playerImage,
   tag,
@@ -33,9 +36,21 @@ const ComponentToPrint = React.forwardRef(({message, player, posterNum}, ref) =>
       </div>
     ) : posterNum === 1 ?( 
       <div ref={ref} class={resultPosterSquare}>
+        <img src={'players/player' + player + '.png'} alt='player' className={playerImage}/>
+        <div className={messageWrapper}>
+          <img src='headline.png' alt='headline'/>
+          <h1>{message}</h1>
+        </div>
+        <img src={tucoimbra} alt='hashtag' className={tag}/>
       </div>
     ) : posterNum === 2 ?( 
       <div ref={ref} class={resultPosterStory}>
+        <img src={'players/player' + player + '.png'} alt='player' className={playerImage}/>
+        <div className={messageWrapper}>
+          <img src='headline.png' alt='headline'/>
+          <h1>{message}</h1>
+        </div>
+        <img src={tucoimbra} alt='hashtag' className={tag}/>
       </div>
     ) : null}
   </>
@@ -58,7 +73,37 @@ const Result = ({message, player}) => {
           w='50'
           h='50'
         />
-        </div>
+
+        {posterStyle === 0 ? (
+        <div class={resultPosterPreview}>
+          <img src={'players/player' + player + '.png'} alt='player' className={playerImage}/>
+          <div className={messageWrapper}>
+            <img src='headline.png' alt='headline'/>
+            <h1>{message}</h1>
+          </div>
+          <img src={tucoimbra} alt='hashtag' className={tag}/>
+          </div>
+          ) : posterStyle === 1 ?( 
+          <div class={resultPosterSquarePreview}>
+            <img src={'players/player' + player + '.png'} alt='player' className={playerImage}/>
+            <div className={messageWrapper}>
+              <img src='headline.png' alt='headline'/>
+              <h1>{message}</h1>
+            </div>
+            <img src={tucoimbra} alt='hashtag' className={tag}/>
+          </div>
+          ) : posterStyle === 2 ?( 
+          <div class={resultPosterStoryPreview}>
+            <img src={'players/player' + player + '.png'} alt='player' className={playerImage}/>
+            <div className={messageWrapper}>
+              <img src='headline.png' alt='headline'/>
+              <h1>{message}</h1>
+            </div>
+            <img src={tucoimbra} alt='hashtag' className={tag}/>
+            </div>
+          ) : null}
+         </div>
+
         <div className={btnWrapper}>
           <div className={posterStyles}>
             <button onClick={()=>setPosterStyle(0)}><div></div><p>horizontal</p></button>

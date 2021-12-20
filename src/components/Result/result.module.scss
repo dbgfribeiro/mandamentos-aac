@@ -8,19 +8,17 @@
   width: 100vw;
   height: 100vh;
   padding: 5rem 2rem;
-  background: rgba($darkgray, 0.98);
+  background: $darkgray;
   color: white;
   text-align: center;
-  overflow: auto;
   z-index: 2;
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
 
   @include tablet {
+    @include flex(column, flex-start, center);
     padding: 5rem 0 0 0;
   }
-
-  @include mobile {}
 
   >h1 {
     font-size: 1.6rem;
@@ -32,29 +30,52 @@
     padding: 2rem;
     transform-origin: top center;
 
-    @include tablet() {
-      transform: scale(0.6);
+    @include tablet {
+      height: fit-content;
     }
 
-    @include mobile() {
-      transform: scale(0.35);
-    }
-
-    .resultPoster {
+    .resultPoster,
+    .resultPosterPreview {
       background-image: url('../../assets/background.jpg');
       background-size: 100% 100%;
       width: 100rem;
       height: 50rem;
-
       position: relative;
+      margin: 2rem 0;
+      overflow: hidden;
+      transform-origin: top center;
+
+      &.resultPosterPreview {
+        display: none;
+      }
+
+      @include tablet {
+        &.resultPoster {
+          transform: translateX(200vw);
+          position: absolute;
+        }
+
+        &.resultPosterPreview {
+          display: block;
+          transform: scale(0.6);
+        }
+      }
+
+      @include mobile {
+        &.resultPosterPreview {
+          display: block;
+          transform: scale(0.35);
+          transform-origin: top;
+        }
+      }
 
       .playerImage {
         width: 37.5rem;
         height: auto;
-        position: absolute;
+        position: sticky;
 
         left: 6.5rem;
-        bottom: 0;
+        margin-top: 3.2rem;
       }
 
       .messageWrapper {
@@ -81,14 +102,11 @@
           font-size: 3.2rem;
           text-align: left;
           text-transform: uppercase;
+          position: sticky;
+          top: 0;
 
-          @include tablet() {
-            margin: 0;
-            transform: scale(0.55) translateX(-12rem);
-          }
-
-          @include mobile() {
-            transform: scale(0.35) translateX(-30rem);
+          @include tablet {
+            margin-left: 4.4rem;
           }
         }
       }
@@ -96,35 +114,167 @@
       .tag {
         position: absolute;
         width: 12.5rem;
+        height: auto;
         right: 0;
         bottom: -3rem;
-        filter: brightness(0);
       }
     }
 
-    .resultPosterStory {
+    .resultPosterStory,
+    .resultPosterStoryPreview {
       background-image: url('../../assets/backgroundmobile.jpg');
       background-size: 100% 100%;
       width: 27rem;
       height: 48rem;
+      position: relative;
+      overflow: hidden;
+      transform-origin: top center;
 
-      @include mobile() {
-        transform: scale(0.75, 0.75);
+      &.resultPosterStoryPreview {
+        display: none;
+      }
+
+      @include tablet {
+        &.resultPosterStory {
+          transform: translateX(200vw);
+          position: absolute;
+        }
+
+        &.resultPosterStoryPreview {
+          display: block;
+        }
+      }
+
+      @include mobile {
+        &.resultPosterStoryPreview {
+          display: block;
+          transform: scale(0.8);
+          transform-origin: top;
+        }
+      }
+
+      .playerImage {
+        width: 20rem;
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+      }
+
+      .messageWrapper {
+        width: 100%;
+        position: absolute;
+        top: 4rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 25rem;
+          height: auto;
+          margin-left: 0.1rem;
+        }
+
+        h1 {
+          color: $darkgray;
+          width: 20rem;
+          margin: -0.1rem 0 0 .5rem;
+          font-size: 1.6rem;
+          text-align: left;
+          text-transform: uppercase;
+        }
+      }
+
+      .tag {
+        position: sticky;
+        width: 7.5rem;
+        height: auto;
+        top: 100%;
+        left: 0.25rem;
+        margin-bottom: -1rem;
       }
     }
 
-    .resultPosterSquare {
+    .resultPosterSquare,
+    .resultPosterSquarePreview {
       background-image: url('../../assets/background.jpg');
       background-size: cover;
       width: 50rem;
       height: 50rem;
+      position: relative;
+      overflow: hidden;
+      transform-origin: top center;
 
-      @include tablet() {
-        transform: scale(0.75, 0.75);
+      &.resultPosterSquarePreview {
+        display: none;
       }
 
-      @include mobile() {
-        transform: scale(0.5, 0.5);
+      @include tablet {
+        &.resultPosterSquare {
+          transform: translateX(200vw);
+          position: absolute;
+        }
+
+        &.resultPosterSquarePreview {
+          display: block;
+          transform: scale(0.8);
+        }
+      }
+
+      @include mobile {
+        &.resultPosterSquarePreview {
+          display: block;
+          transform: scale(0.6);
+          transform-origin: top;
+        }
+      }
+
+      .playerImage {
+        width: 37.5rem;
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        left: -13.5rem;
+        margin: 0;
+      }
+
+      .messageWrapper {
+        width: fit-content;
+        position: absolute;
+        top: 13rem;
+        right: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 32rem;
+          height: auto;
+          margin-left: 0.1rem;
+        }
+
+        h1 {
+          color: $darkgray;
+          width: 25rem;
+          margin: -0.2rem 0 0 .5rem;
+          font-size: 2rem;
+          text-align: left;
+          text-transform: uppercase;
+        }
+      }
+
+      .tag {
+        position: absolute;
+        width: 12.5rem;
+        height: auto;
+        right: 0.25rem;
+        bottom: -3rem;
       }
     }
   }
@@ -137,9 +287,9 @@
 
     @include tablet {
       padding: 2rem;
-      background: rgba($darkgray, 0.98);
-      position: fixed;
+      position: sticky;
       bottom: 0;
+      background: rgba($darkgray, 0.98);
     }
 
     @include mobile {
